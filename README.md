@@ -1,7 +1,10 @@
-````markdown
 # User CRUD Boilerplate with Express.js, bcrypt, and MongoDB
 
 This project is a boilerplate for creating a User CRUD (Create, Read, Update, Delete) application using Express.js, bcrypt for password hashing, and MongoDB for the database. It provides a basic setup to get you started with user authentication and management.
+
+# Author
+
+Atiq Israk Niloy
 
 ## Features
 
@@ -19,11 +22,11 @@ This project is a boilerplate for creating a User CRUD (Create, Read, Update, De
 ## Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/user-crud-boilerplate.git
    cd user-crud-boilerplate
    ```
-````
 
 2. Install dependencies:
 
@@ -100,3 +103,7 @@ This repository is a boilerplate for a User CRUD application built with Express.
 ````
 
 Feel free to replace the placeholder URLs and any specific information as needed for your project.
+
+# Contact
+
+[LinkedIn](https://www.linkedin.com/in/atiq-israk/)
