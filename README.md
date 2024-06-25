@@ -94,14 +94,6 @@ Contributions are welcome! Please fork this repository and submit a pull request
 
 This project is licensed under the MIT License.
 
-````
-
-### Short Description for the Repository
-
-```plaintext
-This repository is a boilerplate for a User CRUD application built with Express.js, bcrypt for password hashing, and MongoDB. It includes basic user authentication and management functionalities, providing a solid foundation for building more complex applications.
-````
-
 Feel free to replace the placeholder URLs and any specific information as needed for your project.
 
 # Contact
