@@ -37,9 +37,17 @@ Atiq Israk Niloy
 3. Create a `.env` file in the root directory and add the following:
 
    ```plaintext
-   PORT=3000
-   MONGODB_URI=mongodb://localhost:27017/user_crud
-   JWT_SECRET=your_jwt_secret
+    PORT=3000
+    MONGODB_URI=enter_your_mongodb_connection_string
+    JWT_SECRET=enter_your_jwt_secret
+    NODE_ENV=development
+    COOKIE_SECRET=enter_your_cookie_secret
+    INITIAL_SETUP=true
+    GMAIL_USER=enter_your_gmail
+    GMAIL_PASS=enter_your_gmail_password
+    SESSION_SECRET=enter_your_session_secret
+    SESSION_TIMEOUT=1800000
+    API_VERSION=enter_your_api_version
    ```
 
 4. Start the server:
