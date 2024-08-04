@@ -7,33 +7,55 @@ const cors = require("cors");
 const fs = require("fs");
 const https = require("https");
 const cookieParser = require("cookie-parser");
+const session = require("./config/session");
+const sessionTimeout = require("./middleware/sessionTimeout");
 const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const customerRoutes = require("./routes/customerRoutes");
+const roleRoutes = require("./routes/roleRoutes");
+const permissionRoutes = require("./routes/permissionRoutes");
+const roleAssignmentRoutes = require("./routes/roleAssignmentRoutes");
 
 require("dotenv").config();
 
 const app = express();
+
 const port = process.env.PORT || 3000;
+const apiVersion = process.env.API_VERSION || "v1";
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(helmet());
-// app.use(cors({
-//     origin: 'http://your-frontend-domain.com',
-//     credentials: true
-//   }));
 app.use(cors());
 app.use(
-  "/api/",
   rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
     message: "Too many requests from this IP, please try again later",
   })
 );
 
+// Session middleware
+app.use(session);
+
+// Apply session timeout middleware to protected routes
+app.use(sessionTimeout);
+
 // Routes
-app.use("/api/users", userRoutes);
+// app.use("/api/users", userRoutes);
+// app.use("/api/admins", adminRoutes);
+// app.use("/api/customers", customerRoutes);
+// app.use("/api/roles", roleRoutes);
+// app.use("/api/roleAssignments", roleAssignmentRoutes);
+// app.use("/api/permissions", permissionRoutes);
+
+app.use(`/api/${apiVersion}/users`, userRoutes);
+app.use(`/api/${apiVersion}/admins`, adminRoutes);
+app.use(`/api/${apiVersion}/customers`, customerRoutes);
+app.use(`/api/${apiVersion}/roles`, roleRoutes);
+app.use(`/api/${apiVersion}/roleAssignments`, roleAssignmentRoutes);
+app.use(`/api/${apiVersion}/permissions`, permissionRoutes);
 
 // MongoDB Connection
 mongoose
@@ -64,3 +86,16 @@ if (process.env.NODE_ENV === "production") {
     console.log(`Server running in development mode on port ${port} with HTTP`);
   });
 }
+
+app.get("/set-session", (req, res) => {
+  req.session.test = "Session is working!";
+  res.send("Session variable set!");
+});
+
+app.get("/get-session", (req, res) => {
+  if (req.session.test) {
+    res.send(`Session value: ${req.session.test}`);
+  } else {
+    res.send("No session value found");
+  }
+});

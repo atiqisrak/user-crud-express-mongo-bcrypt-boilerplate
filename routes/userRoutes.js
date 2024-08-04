@@ -7,14 +7,18 @@ const {
   getUserById,
   updateUser,
   deleteUser,
+  bulkCreateUsers,
 } = require("../controllers/userController");
-const { protect } = require("../middleware/authMiddleware");
+const { protect, authorize } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 router.route("/").post(createUser).get(protect, getUsers);
 router.route("/login").post(loginUser);
 router.route("/logout").post(logoutUser);
+
+router.route("/bulk").post(protect, authorize("superadmin"), bulkCreateUsers);
+
 router
   .route("/:id")
   .get(protect, getUserById)
